@@ -1,29 +1,18 @@
-class Doc {
-  int coverI;
-  bool hasFulltext;
-  int editionCount;
-  String title;
-  List<String> authorName;
-  int firstPublishYear;
-  String key;
-  List<String> ia;
-  List<String> authorKey;
-  bool publicScanB;
+import '../../domain/entitis/doc_entiti.dart';
 
-  Doc({
-    required this.coverI,
-    required this.hasFulltext,
-    required this.editionCount,
-    required this.title,
-    required this.authorName,
-    required this.firstPublishYear,
-    required this.key,
-    required this.ia,
-    required this.authorKey,
-    required this.publicScanB,
-  });
-
-  factory Doc.fromJson(Map<String, dynamic> json) => Doc(
+class DocModel extends DocEntiti {
+  DocModel(
+      {required super.coverI,
+      required super.hasFulltext,
+      required super.editionCount,
+      required super.title,
+      required super.authorName,
+      required super.firstPublishYear,
+      required super.key,
+      required super.ia,
+      required super.authorKey,
+      required super.publicScanB});
+  factory DocModel.fromJson(Map<String, dynamic> json) => DocModel(
         coverI: json["cover_i"],
         hasFulltext: json["has_fulltext"],
         editionCount: json["edition_count"],
