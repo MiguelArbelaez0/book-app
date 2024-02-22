@@ -3,24 +3,31 @@ import 'package:book_app/domain/entitis/search_result_entiti.dart';
 
 import 'doc_model.dart';
 
-class SearchResulthModel extends SearchResultEntiti {
+class SearchResulthModel {
   SearchResulthModel({
-    required super.start,
-    required super.numFound,
-    required super.docs,
+    required this.start,
+    required this.numFound,
+    required this.docs,
   });
 
-  factory SearchResulthModel.fromJson(Map<String, dynamic> json) =>
-      SearchResulthModel(
-        start: json["start"],
-        numFound: json["num_found"],
-        docs:
-            List<DocModel>.from(json["docs"].map((x) => DocModel.fromJson(x))),
-      );
+  final int start;
+  final int numFound;
+  final List<DocModel> docs;
 
-  Map<String, dynamic> toJson() => {
-        "start": start,
-        "num_found": numFound,
-        "docs": List<dynamic>.from(docs.map((x) => x.toJson())),
-      };
+  factory SearchResulthModel.fromMap(Map<String, dynamic> map) {
+    return SearchResulthModel(
+      start: map['start'] as int,
+      numFound: map['num_found'] as int,
+      docs: List<DocModel>.from(
+          map['docs'].map((x) => DocModel.fromMap(x as Map<String, dynamic>))),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'start': start,
+      'num_found': numFound,
+      'docs': docs.map((x) => x.toMap()).toList(),
+    };
+  }
 }
