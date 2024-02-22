@@ -10,7 +10,7 @@ class SearchBookRepositoryImp extends SearchBookRepository {
       : _searchBookDataSource = searchBookDataSource ?? SearchBookDataSource();
 
   @override
-  Future<SearchResulthModel> onGetBook(String query) async {
+  Future<SearchResult> onGetBook(String query) async {
     return await _searchBookDataSource.getBookResult(query);
   }
 }

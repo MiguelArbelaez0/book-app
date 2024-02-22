@@ -1,4 +1,4 @@
-class DocEntiti {
+class DocumentEntiti {
   final int coverI;
   final bool hasFulltext;
   final int editionCount;
@@ -10,7 +10,7 @@ class DocEntiti {
   final List<String> authorKey;
   final bool publicScanB;
 
-  DocEntiti({
+  DocumentEntiti({
     required this.coverI,
     required this.hasFulltext,
     required this.editionCount,

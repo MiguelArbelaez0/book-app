@@ -9,7 +9,7 @@ class SeacrhBookUseCase {
   SeacrhBookUseCase({SearchBookRepository? searchBookRepository})
       : _bookRepository = searchBookRepository ?? SearchBookRepositoryImp();
 
-  Future<SearchResulthModel> invokeResultBook(String query) async {
+  Future<SearchResult> invokeResultBook(String query) async {
     return await _bookRepository.onGetBook(query);
   }
 }
