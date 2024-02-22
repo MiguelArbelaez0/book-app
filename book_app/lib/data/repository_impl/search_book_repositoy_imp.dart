@@ -1,7 +1,7 @@
 import 'package:book_app/data/models/search_result_model.dart';
 import 'package:book_app/data/remote_data_source/search_book_data_source.dart';
 
-import '../repository/search_book_repository.dart';
+import '../../domain/repository/search_book_repository.dart';
 
 class SearchBookRepositoryImp extends SearchBookRepository {
   final SearchBookDataSource _searchBookDataSource;

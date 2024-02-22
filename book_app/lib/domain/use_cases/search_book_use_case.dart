@@ -1,5 +1,5 @@
 import 'package:book_app/data/models/search_result_model.dart';
-import 'package:book_app/domain/repository_impl/search_book_repositoy_imp.dart';
+import 'package:book_app/data/repository_impl/search_book_repositoy_imp.dart';
 
 import '../repository/search_book_repository.dart';
 
