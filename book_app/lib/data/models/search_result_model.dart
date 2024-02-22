@@ -3,13 +3,12 @@ import 'package:book_app/domain/entitis/search_result_entiti.dart';
 
 import 'doc_model.dart';
 
-class SearchResulthModel  extends SearchResultEntiti{
+class SearchResulthModel extends SearchResultEntiti {
   SearchResulthModel({
     required super.start,
     required super.numFound,
     required super.docs,
-  })
- 
+  });
 
   factory SearchResulthModel.fromJson(Map<String, dynamic> json) =>
       SearchResulthModel(
