@@ -11,19 +11,19 @@ class DocDetails {
     required this.docs,
   });
 
-  factory DocDetails.fromJson(Map<String, dynamic> json) => DocDetails(
-        numFound: json["numFound"],
-        start: json["start"],
-        numFoundExact: json["numFoundExact"],
+  factory DocDetails.fromMap(Map<String, dynamic> map) => DocDetails(
+        numFound: map["numFound"],
+        start: map["start"],
+        numFoundExact: map["numFoundExact"],
         docs: List<DocDetailsDoc>.from(
-            json["docs"].map((x) => DocDetailsDoc.fromJson(x))),
+            map["docs"].map((x) => DocDetailsDoc.fromMap(x))),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "numFound": numFound,
         "start": start,
         "numFoundExact": numFoundExact,
-        "docs": List<dynamic>.from(docs.map((x) => x.toJson())),
+        "docs": docs.map((x) => x.toMap()).toList(),
       };
 }
 
@@ -40,18 +40,18 @@ class DocDetailsDoc {
     required this.editions,
   });
 
-  factory DocDetailsDoc.fromJson(Map<String, dynamic> json) => DocDetailsDoc(
-        key: json["key"],
-        title: json["title"],
-        authorName: List<String>.from(json["author_name"].map((x) => x)),
-        editions: Editions.fromJson(json["editions"]),
+  factory DocDetailsDoc.fromMap(Map<String, dynamic> map) => DocDetailsDoc(
+        key: map["key"],
+        title: map["title"],
+        authorName: List<String>.from(map["author_name"].map((x) => x)),
+        editions: Editions.fromMap(map["editions"]),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "key": key,
         "title": title,
-        "author_name": List<dynamic>.from(authorName.map((x) => x)),
-        "editions": editions.toJson(),
+        "author_name": authorName,
+        "editions": editions.toMap(),
       };
 }
 
@@ -68,19 +68,19 @@ class Editions {
     required this.docs,
   });
 
-  factory Editions.fromJson(Map<String, dynamic> json) => Editions(
-        numFound: json["numFound"],
-        start: json["start"],
-        numFoundExact: json["numFoundExact"],
+  factory Editions.fromMap(Map<String, dynamic> map) => Editions(
+        numFound: map["numFound"],
+        start: map["start"],
+        numFoundExact: map["numFoundExact"],
         docs: List<EditionsDoc>.from(
-            json["docs"].map((x) => EditionsDoc.fromJson(x))),
+            map["docs"].map((x) => EditionsDoc.fromMap(x))),
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "numFound": numFound,
         "start": start,
         "numFoundExact": numFoundExact,
-        "docs": List<dynamic>.from(docs.map((x) => x.toJson())),
+        "docs": docs.map((x) => x.toMap()).toList(),
       };
 }
 
@@ -97,17 +97,17 @@ class EditionsDoc {
     required this.ebookAccess,
   });
 
-  factory EditionsDoc.fromJson(Map<String, dynamic> json) => EditionsDoc(
-        key: json["key"],
-        title: json["title"],
-        language: List<String>.from(json["language"].map((x) => x)),
-        ebookAccess: json["ebook_access"],
+  factory EditionsDoc.fromMap(Map<String, dynamic> map) => EditionsDoc(
+        key: map["key"],
+        title: map["title"],
+        language: List<String>.from(map["language"].map((x) => x)),
+        ebookAccess: map["ebook_access"],
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toMap() => {
         "key": key,
         "title": title,
-        "language": List<dynamic>.from(language.map((x) => x)),
+        "language": language,
         "ebook_access": ebookAccess,
       };
 }

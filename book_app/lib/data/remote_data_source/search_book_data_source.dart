@@ -8,10 +8,15 @@ class SearchBookDataSource {
     const baseUrl = "http://openlibrary.org/";
     const endpoint = "search.json";
 
-    final uri = Uri.parse("$baseUrl$endpoint?q=$query");
+    final url = Uri.parse("$baseUrl$endpoint?q=$query");
 
-    final response = await http.get(uri);
+    final http.Response response = await http.get(url);
 
-    return SearchResulthModel.fromJson(json.decode(response.body));
+    if (response.statusCode == 200) {
+      var responseJson = json.decode(response.body);
+      return responseJson.map((e) => SearchResulthModel.fromMap(e));
+    } else {
+      throw Exception('Failed to load search results');
+    }
   }
 }

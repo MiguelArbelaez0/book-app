@@ -12,29 +12,34 @@ class DocModel extends DocEntiti {
       required super.ia,
       required super.authorKey,
       required super.publicScanB});
-  factory DocModel.fromJson(Map<String, dynamic> json) => DocModel(
-        coverI: json["cover_i"],
-        hasFulltext: json["has_fulltext"],
-        editionCount: json["edition_count"],
-        title: json["title"],
-        authorName: List<String>.from(json["author_name"].map((x) => x)),
-        firstPublishYear: json["first_publish_year"],
-        key: json["key"],
-        ia: List<String>.from(json["ia"].map((x) => x)),
-        authorKey: List<String>.from(json["author_key"].map((x) => x)),
-        publicScanB: json["public_scan_b"],
-      );
 
-  Map<String, dynamic> toJson() => {
-        "cover_i": coverI,
-        "has_fulltext": hasFulltext,
-        "edition_count": editionCount,
-        "title": title,
-        "author_name": List<dynamic>.from(authorName.map((x) => x)),
-        "first_publish_year": firstPublishYear,
-        "key": key,
-        "ia": List<dynamic>.from(ia.map((x) => x)),
-        "author_key": List<dynamic>.from(authorKey.map((x) => x)),
-        "public_scan_b": publicScanB,
-      };
+  factory DocModel.fromMap(Map<String, dynamic> map) {
+    return DocModel(
+      coverI: map['cover_i'] as int,
+      hasFulltext: map['has_fulltext'] as bool,
+      editionCount: map['edition_count'] as int,
+      title: map['title'] as String,
+      authorName: List<String>.from(map['author_name'].map((x) => x as String)),
+      firstPublishYear: map['first_publish_year'] as int,
+      key: map['key'] as String,
+      ia: List<String>.from(map['ia'].map((x) => x as String)),
+      authorKey: List<String>.from(map['author_key'].map((x) => x as String)),
+      publicScanB: map['public_scan_b'] as bool,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'cover_i': coverI,
+      'has_fulltext': hasFulltext,
+      'edition_count': editionCount,
+      'title': title,
+      'author_name': authorName,
+      'first_publish_year': firstPublishYear,
+      'key': key,
+      'ia': ia,
+      'author_key': authorKey,
+      'public_scan_b': publicScanB,
+    };
+  }
 }
