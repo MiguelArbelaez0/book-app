@@ -7,7 +7,7 @@ class SearchBookNormalState extends SearchBookState {}
 class SearchBookLoadingState extends SearchBookState {}
 
 class SearchBookCompletedState extends SearchBookState {
-  final ModelData modelData; // Datos completados
+  final ModelData modelData;
 
   SearchBookCompletedState({required this.modelData});
 }
