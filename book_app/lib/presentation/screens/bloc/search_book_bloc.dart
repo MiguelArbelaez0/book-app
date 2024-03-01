@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:book_app/data/models/document_model.dart';
 import 'package:book_app/data/models/search_result_model.dart';
 import 'package:book_app/domain/use_cases/search_book_use_case.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 part 'search_book_event.dart';
 part 'search_book_state.dart';
 
