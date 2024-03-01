@@ -17,7 +17,7 @@ class SearchBookBloc extends Bloc<SearchBookEvent, SearchBookState> {
 
     final SearchResult searchResult =
         await _seacrhBookUseCase.invokeResultBook(event.query);
-    emit(SearchBookCompletedState(
-        modelData: ModelData(books: searchResult.docs)));
+    final ModelData modelData = ModelData(books: searchResult.docs);
+    emit(SearchBookCompletedState(modelData: modelData));
   }
 }
