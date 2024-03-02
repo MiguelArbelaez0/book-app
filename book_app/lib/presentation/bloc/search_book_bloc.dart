@@ -7,17 +7,17 @@ part 'search_book_state.dart';
 
 class SearchBookBloc extends Bloc<SearchBookEvent, SearchBookState> {
   final SeacrhBookUseCase _seacrhBookUseCase;
-  SearchBookBloc(this._seacrhBookUseCase) : super(SearchBookNormalState()) {
+  SearchBookBloc(this._seacrhBookUseCase)
+      : super(SearchBookNormalState(ModelData(books: []))) {
     on<SearchBookResultEvent>((event, emit) => invokeBookResult(event, emit));
   }
 
   invokeBookResult(
       SearchBookResultEvent event, Emitter<SearchBookState> emit) async {
-    emit(SearchBookLoadingState());
-
-    final SearchResult searchResult =
+    emit(SearchBookLoadingState(state.modelData));
+    SearchResult searchResult =
         await _seacrhBookUseCase.invokeResultBook(event.query);
-    final ModelData modelData = ModelData(books: searchResult.docs);
-    emit(SearchBookCompletedState(modelData: modelData));
+    ModelData modelData = state.modelData.copyWith(books: searchResult.docs);
+    emit(SearchBookCompletedState(modelData));
   }
 }

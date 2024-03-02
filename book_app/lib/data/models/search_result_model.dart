@@ -1,8 +1,8 @@
 import 'package:book_app/data/models/document_model.dart';
 
 class SearchResult {
-  final int start;
-  final int numFound;
+  final int? start;
+  final int? numFound;
   final List<Document> docs;
 
   SearchResult(
@@ -10,8 +10,8 @@ class SearchResult {
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
     return SearchResult(
-      start: json['start'],
-      numFound: json['numFound'],
+      start: json['start'] ?? 0,
+      numFound: json['numFound'] ?? 0,
       docs: (json['docs'] as List).map((i) => Document.fromJson(i)).toList(),
     );
   }

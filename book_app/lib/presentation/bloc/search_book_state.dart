@@ -1,15 +1,23 @@
 part of 'search_book_bloc.dart';
 
-abstract class SearchBookState {}
-
-class SearchBookNormalState extends SearchBookState {}
-
-class SearchBookLoadingState extends SearchBookState {}
-
-class SearchBookCompletedState extends SearchBookState {
+abstract class SearchBookState {
   final ModelData modelData;
 
-  SearchBookCompletedState({required this.modelData});
+  SearchBookState(this.modelData);
+}
+
+class SearchBookNormalState extends SearchBookState {
+  SearchBookNormalState(super.modelData);
+}
+
+class SearchBookLoadingState extends SearchBookState {
+  SearchBookLoadingState(super.modelData);
+}
+
+class SearchBookCompletedState extends SearchBookState {
+  SearchBookCompletedState(
+    super.modelData,
+  );
 }
 
 class ModelData {
