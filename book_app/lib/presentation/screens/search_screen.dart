@@ -41,11 +41,11 @@ class _SearchScreenState extends State<SearchScreen> {
         BlocBuilder<SearchBookBloc, SearchBookState>(
           bloc: _searchBookBloc,
           builder: (context, state) {
+            final books = state.modelData.books ?? [];
             debugPrint('El estado actual es: $state');
             if (state is SearchBookLoadingState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is SearchBookCompletedState) {
-              final books = state.modelData.books ?? [];
               return ListView.builder(
                 itemCount: books.length,
                 itemBuilder: (BuildContext context, int index) {
