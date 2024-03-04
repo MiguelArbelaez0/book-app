@@ -41,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
         BlocBuilder<SearchBookBloc, SearchBookState>(
           bloc: _searchBookBloc,
           builder: (context, state) {
+            debugPrint('El estado actual es: $state');
             if (state is SearchBookLoadingState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is SearchBookCompletedState) {
