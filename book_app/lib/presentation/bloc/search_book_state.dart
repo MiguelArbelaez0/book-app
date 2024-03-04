@@ -21,7 +21,7 @@ class SearchBookCompletedState extends SearchBookState {
 }
 
 class ModelData {
-  final List<Document> books;
+  final List<Document>? books;
   ModelData({required this.books});
 
   ModelData copyWith({List<Document>? books}) =>
