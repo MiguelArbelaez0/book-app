@@ -26,13 +26,13 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(),
       body: ListView(children: [
         Container(
-          margin: EdgeInsets.all(20),
+          margin: const EdgeInsets.all(20),
           height: 325,
           width: 50,
           child: TextField(
             onChanged: (value) =>
                 _searchBookBloc.add(SearchBookResultEvent(query: value)),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: OutlineInputBorder(),
               suffixIcon: Icon(Icons.search),
             ),
@@ -42,17 +42,19 @@ class _SearchScreenState extends State<SearchScreen> {
           bloc: _searchBookBloc,
           builder: (context, state) {
             final books = state.modelData.books ?? [];
-            debugPrint('El estado actual es: $state');
             if (state is SearchBookLoadingState) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is SearchBookCompletedState) {
-              return ListView.builder(
-                itemCount: books.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(books[index].title),
-                  );
-                },
+              return SizedBox(
+                height: 100,
+                child: ListView.builder(
+                  itemCount: books.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      title: Text(books[index].titleSuggest ?? ""),
+                    );
+                  },
+                ),
               );
             }
             return Container();

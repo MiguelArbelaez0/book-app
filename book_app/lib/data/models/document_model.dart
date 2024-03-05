@@ -1,16 +1,16 @@
 class Document {
-  final String titleSuggest;
-  final List<String> editionKey;
-  final int coverId;
-  final List<String> isbn;
-  final bool hasFulltext;
-  final List<String> authorName;
-  final List<String> contributor;
-  final List<String> authorKey;
-  final int firstPublishYear;
-  final String title;
-  final List<String> publisher;
-  final List<String> language;
+  final String? titleSuggest;
+  final List<String>? editionKey;
+  final int? coverId;
+  final List<String>? isbn;
+  final bool? hasFulltext;
+  final List<String>? authorName;
+  final List<String>? contributor;
+  final List<String>? authorKey;
+  final int? firstPublishYear;
+  final String? title;
+  final List<String>? publisher;
+  final List<String>? language;
 
   Document(
       {required this.titleSuggest,
@@ -28,18 +28,18 @@ class Document {
 
   factory Document.fromJson(Map<String, dynamic> json) {
     return Document(
-      titleSuggest: json['title_suggest'],
-      editionKey: List<String>.from(json['edition_key']),
-      coverId: json['cover_i'],
-      isbn: List<String>.from(json['isbn']),
-      hasFulltext: json['has_fulltext'],
-      authorName: List<String>.from(json['author_name']),
-      contributor: List<String>.from(json['contributor']),
-      authorKey: List<String>.from(json['author_key']),
-      firstPublishYear: json['first_publish_year'],
-      title: json['title'],
-      publisher: List<String>.from(json['publisher']),
-      language: List<String>.from(json['language']),
+      titleSuggest: json['title_suggest'] ?? "",
+      editionKey: List<String>.from(json['edition_key'] ?? [""]),
+      coverId: json['cover_i'] ?? 0,
+      isbn: List<String>.from(json['isbn'] ?? [""]),
+      hasFulltext: json['has_fulltext'] ?? false,
+      authorName: List<String>.from(json['author_name'] ?? [""]),
+      contributor: List<String>.from(json['contributor'] ?? [""]),
+      authorKey: List<String>.from(json['author_key'] ?? [""]),
+      firstPublishYear: json['first_publish_year'] ?? 0,
+      title: json['title'] ?? "",
+      publisher: List<String>.from(json['publisher'] ?? [""]),
+      language: List<String>.from(json['language'] ?? [""]),
     );
   }
 
