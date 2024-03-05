@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:book_app/data/models/document_model.dart';
 import 'package:book_app/data/models/search_result_model.dart';
 import 'package:book_app/domain/use_cases/search_book_use_case.dart';
@@ -7,6 +9,7 @@ part 'search_book_state.dart';
 
 class SearchBookBloc extends Bloc<SearchBookEvent, SearchBookState> {
   final SeacrhBookUseCase _seacrhBookUseCase;
+
   SearchBookBloc(this._seacrhBookUseCase)
       : super(SearchBookNormalState(ModelData(books: []))) {
     on<SearchBookResultEvent>((event, emit) => invokeBookResult(event, emit));
