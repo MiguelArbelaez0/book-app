@@ -27,7 +27,14 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "Books",
+          style: TextStyle(color: Colors.green),
+        ),
+        backgroundColor: Colors.white,
+      ),
       body: Container(
         margin: const EdgeInsets.all(20),
         child: Column(
@@ -58,8 +65,16 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: ListView.builder(
                       itemCount: books.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return ListTile(
-                          title: Text(books[index].titleSuggest ?? ""),
+                        final book = books[index];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "detail_screen",
+                                arguments: book);
+                            ;
+                          },
+                          child: ListTile(
+                            title: Text(books[index].titleSuggest ?? ""),
+                          ),
                         );
                       },
                     ),

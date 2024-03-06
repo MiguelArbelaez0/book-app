@@ -12,11 +12,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    SearchScreen(),
-    FavoritesScreen(),
+    const SearchScreen(),
+    const FavoritesScreen(),
   ];
 
-  void onTabTapped(int index) {
+  void onSelectIcon(int index) {
     setState(() {
       _currentIndex = index;
     });
@@ -27,9 +27,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.green,
+        onTap: onSelectIcon,
         currentIndex: _currentIndex,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Search',
@@ -38,10 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.favorite),
             label: 'Favorites',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.person),
-          //   label: 'Perfil',
-          // )
         ],
       ),
     );

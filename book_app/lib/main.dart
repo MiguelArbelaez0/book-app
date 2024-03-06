@@ -1,4 +1,5 @@
 import 'package:book_app/presentation/home_screen.dart';
+import 'package:book_app/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'domain/use_cases/search_book_use_case.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         // onGenerateRoute: Routes.generateRoute,
-        home: const HomeScreen(),
+        onGenerateRoute: Routes.generateRoutes,
       ),
     );
   }
