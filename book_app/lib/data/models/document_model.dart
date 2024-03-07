@@ -11,6 +11,7 @@ class Document {
   final String? title;
   final List<String>? publisher;
   final List<String>? language;
+  bool isFavorite; // Agrega esta línea
 
   Document(
       {required this.titleSuggest,
@@ -24,7 +25,8 @@ class Document {
       required this.firstPublishYear,
       required this.title,
       required this.publisher,
-      required this.language});
+      required this.language,
+      this.isFavorite = false}); // Agrega esta línea
 
   factory Document.fromJson(Map<String, dynamic> json) {
     return Document(
@@ -40,6 +42,7 @@ class Document {
       title: json['title'] ?? "",
       publisher: List<String>.from(json['publisher'] ?? [""]),
       language: List<String>.from(json['language'] ?? [""]),
+      isFavorite: json['isFavorite'] ?? false, // Agrega esta línea
     );
   }
 
@@ -57,6 +60,7 @@ class Document {
       'title': title,
       'publisher': publisher,
       'language': language,
+      'isFavorite': isFavorite, // Agrega esta línea
     };
   }
 }

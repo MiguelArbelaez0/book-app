@@ -23,4 +23,6 @@ class SearchBookBloc extends Bloc<SearchBookEvent, SearchBookState> {
     ModelData modelData = state.modelData.copyWith(books: searchResult.docs);
     emit(SearchBookCompletedState(modelData));
   }
+
+  addFavoritesbooks() {}
 }

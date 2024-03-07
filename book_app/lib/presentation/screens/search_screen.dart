@@ -15,7 +15,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late final SearchBookBloc _searchBookBloc;
-  final _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   Timer? _debounceTimer;
 
   @override
