@@ -1,7 +1,7 @@
-import 'package:book_app/presentation/home_screen.dart';
 import 'package:book_app/presentation/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'domain/use_cases/add_favorite_book_use.dart';
 import 'domain/use_cases/search_book_use_case.dart';
 import 'presentation/bloc/search_book_bloc.dart';
 
@@ -16,7 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SearchBookBloc(SeacrhBookUseCase()),
+      create: (context) =>
+          SearchBookBloc(SeacrhBookUseCase(), AddFavoriteBookUseCase()),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

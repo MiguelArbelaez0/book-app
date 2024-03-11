@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/document_model.dart';
+import '../bloc/search_book_bloc.dart';
+import '../bloc/search_book_event.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final Document document;
 
   const DetailScreen({
@@ -11,6 +14,11 @@ class DetailScreen extends StatelessWidget {
     required this.document,
   }) : super(key: key);
 
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +36,11 @@ class DetailScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              // BlocProvider.of<SearchBookBloc>(context).add(
+              //   AddFavoriteBookEvent(document: document),
+              // );
+            },
             icon: const Icon(
               Icons.favorite,
               color: Colors.red,
@@ -56,7 +68,7 @@ class DetailScreen extends StatelessWidget {
               ),
             ),
             Text(
-              document.title ?? "",
+              widget.document.title ?? "",
               style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -64,7 +76,7 @@ class DetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              "Author: ${document.authorName?.join() ?? 'no se encontraron autores'}",
+              "Author: ${widget.document.authorName?.join() ?? 'no se encontraron autores'}",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -73,7 +85,7 @@ class DetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Text(
-              "First Publish Year: ${document.firstPublishYear?.toString() ?? 'N/A'}",
+              "First Publish Year: ${widget.document.firstPublishYear?.toString() ?? 'N/A'}",
               style: const TextStyle(
                 fontSize: 16,
                 color: Color(0xFF0D0842),
@@ -81,7 +93,7 @@ class DetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Text(
-              "Language: ${document.language?.join(', ') ?? 'Language not found'}",
+              "Language: ${widget.document.language?.join(', ') ?? 'Language not found'}",
               style: const TextStyle(fontSize: 16, color: Color(0xFF0D0842)),
             )
           ],

@@ -4,7 +4,9 @@ import 'package:book_app/presentation/bloc/search_book_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/use_cases/add_favorite_book_use.dart';
 import '../../domain/use_cases/search_book_use_case.dart';
+import '../bloc/search_book_event.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -20,7 +22,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    _searchBookBloc = SearchBookBloc(SeacrhBookUseCase());
+    _searchBookBloc =
+        SearchBookBloc(SeacrhBookUseCase(), AddFavoriteBookUseCase());
     super.initState();
   }
 
@@ -54,7 +57,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             const SizedBox(height: 20),
-            BlocBuilder<SearchBookBloc, SearchBookState>(
+            BlocBuilder<SearchBookBloc, BookState>(
               bloc: _searchBookBloc,
               builder: (context, state) {
                 final books = state.modelData.books ?? [];

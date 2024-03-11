@@ -1,23 +1,31 @@
 part of 'search_book_bloc.dart';
 
-abstract class SearchBookState {
+abstract class BookState {
   final ModelData modelData;
 
-  SearchBookState(this.modelData);
+  BookState(this.modelData);
 }
 
-class SearchBookNormalState extends SearchBookState {
+class SearchBookNormalState extends BookState {
   SearchBookNormalState(super.modelData);
 }
 
-class SearchBookLoadingState extends SearchBookState {
+class SearchBookLoadingState extends BookState {
   SearchBookLoadingState(super.modelData);
 }
 
-class SearchBookCompletedState extends SearchBookState {
+class SearchBookCompletedState extends BookState {
   SearchBookCompletedState(
     super.modelData,
   );
+}
+
+class BookAddedToFavoritesState extends BookState {
+  BookAddedToFavoritesState(super.modelData);
+}
+
+class BookAddedToFavoritesCompleteState extends BookState {
+  BookAddedToFavoritesCompleteState(super.modelData);
 }
 
 class ModelData {
