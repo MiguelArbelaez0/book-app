@@ -2,6 +2,8 @@ import '../../data/models/document_model.dart';
 
 abstract class BookEvent {}
 
+class GetFavoriteBookEvent extends BookEvent {}
+
 class SearchBookResultEvent extends BookEvent {
   final String query;
   SearchBookResultEvent({required this.query});

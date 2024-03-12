@@ -1,10 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/models/document_model.dart';
-import '../bloc/search_book_bloc.dart';
-import '../bloc/search_book_event.dart';
 
 class DetailScreen extends StatefulWidget {
   final Document document;
@@ -38,7 +34,7 @@ class _DetailScreenState extends State<DetailScreen> {
           IconButton(
             onPressed: () {
               // BlocProvider.of<SearchBookBloc>(context).add(
-              //   AddFavoriteBookEvent(document: document),
+              //   AddFavoriteBookEvent(documentBook: documentbo),
               // );
             },
             icon: const Icon(

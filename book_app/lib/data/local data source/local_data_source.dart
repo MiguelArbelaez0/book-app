@@ -12,7 +12,17 @@ class LocalDataSource {
     await prefs.setStringList('favoriteBooks', favoriteBooks);
   }
 
-  Future<List<Document>?> getFavoriteBooks() async {
+  // Future<List<Document>?> getFavoriteBooks() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   if (prefs.getString(documentKey) != null) {
+  //     List<String> favoriteBooks = prefs.getStringList('favoriteBooks') ?? [];
+  //     return favoriteBooks
+  //         .map((item) => Document.fromJson(jsonDecode(item)))
+  //         .toList();
+  //   }
+  //   return null;
+  // }
+  Future<List<Document>> getFavoriteBooks() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getString(documentKey) != null) {
       List<String> favoriteBooks = prefs.getStringList('favoriteBooks') ?? [];
@@ -20,6 +30,6 @@ class LocalDataSource {
           .map((item) => Document.fromJson(jsonDecode(item)))
           .toList();
     }
-    return null;
+    return [];
   }
 }

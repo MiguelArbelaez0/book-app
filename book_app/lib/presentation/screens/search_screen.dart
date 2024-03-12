@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:book_app/domain/use_cases/get_favorite_book_use_case.dart';
 import 'package:book_app/presentation/bloc/search_book_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +22,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    _searchBookBloc =
-        SearchBookBloc(SeacrhBookUseCase(), AddFavoriteBookUseCase());
+    _searchBookBloc = SearchBookBloc(SeacrhBookUseCase(),
+        AddFavoriteBookUseCase(), GetBookFavoriteUseCase());
     super.initState();
   }
 
@@ -69,14 +69,29 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: books.length,
                       itemBuilder: (BuildContext context, int index) {
                         final book = books[index];
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, "detail_screen",
-                                arguments: book);
-                            ;
-                          },
-                          child: ListTile(
-                            title: Text(books[index].titleSuggest ?? ""),
+                        return ListTile(
+                          title: Text(books[index].titleSuggest ?? ""),
+                          trailing: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Icon(
+                                  Icons.favorite_border,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  _searchBookBloc.add(
+                                      AddFavoriteBookEvent(document: book));
+                                },
+                              ),
+                              IconButton(
+                                icon: Icon(
+                                  Icons.info_outline,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
                           ),
                         );
                       },
