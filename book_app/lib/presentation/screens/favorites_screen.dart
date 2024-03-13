@@ -30,7 +30,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorite Books'),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(
+          'Favorite Books',
+          style: TextStyle(color: Colors.green),
+        ),
       ),
       body: BlocBuilder<SearchBookBloc, BookState>(
         bloc: _searchBookBloc,
@@ -44,7 +49,10 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 final book = state.modelData.favoriteBooks![index];
                 return ListTile(
                   title: Text(book.title ?? ""),
-                  // Add other book details here
+                  trailing: GestureDetector(
+                    onTap: () {},
+                    child: const Icon(Icons.bookmark, color: Colors.green),
+                  ),
                 );
               },
             );

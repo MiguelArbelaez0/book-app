@@ -20,6 +20,7 @@ class _DetailScreenState extends State<DetailScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        centerTitle: true,
         title: const Text("Detalles del Libro"),
         leading: IconButton(
           icon: const Icon(
@@ -30,19 +31,6 @@ class _DetailScreenState extends State<DetailScreen> {
             Navigator.of(context).pop();
           },
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              // BlocProvider.of<SearchBookBloc>(context).add(
-              //   AddFavoriteBookEvent(documentBook: documentbo),
-              // );
-            },
-            icon: const Icon(
-              Icons.favorite,
-              color: Colors.red,
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

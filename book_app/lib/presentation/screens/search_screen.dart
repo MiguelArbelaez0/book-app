@@ -75,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.favorite_border,
                                   color: Colors.red,
                                 ),
@@ -85,11 +85,17 @@ class _SearchScreenState extends State<SearchScreen> {
                                 },
                               ),
                               IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.info_outline,
                                   color: Colors.blue,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    'detail_screen',
+                                    arguments: book,
+                                  );
+                                },
                               ),
                             ],
                           ),
