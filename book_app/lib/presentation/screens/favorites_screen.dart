@@ -1,10 +1,58 @@
-import 'package:flutter/material.dart';
+import 'package:book_app/domain/use_cases/add_favorite_book_use.dart';
+import 'package:book_app/domain/use_cases/get_favorite_book_use_case.dart';
+import 'package:book_app/domain/use_cases/search_book_use_case.dart';
+import 'package:book_app/presentation/bloc/search_book_bloc.dart';
 
-class FavoritesScreen extends StatelessWidget {
-  const FavoritesScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/search_book_event.dart';
+
+class FavoritesScreen extends StatefulWidget {
+  const FavoritesScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
+  late final SearchBookBloc _searchBookBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchBookBloc = SearchBookBloc(SeacrhBookUseCase(),
+        AddFavoriteBookUseCase(), GetBookFavoriteUseCase());
+    _searchBookBloc.add(GetFavoriteBookEvent());
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Favorite Books'),
+      ),
+      body: BlocBuilder<SearchBookBloc, BookState>(
+        bloc: _searchBookBloc,
+        builder: (context, state) {
+          if (state is GetBookLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is GetFavoriteBookCompletedState) {
+            return ListView.builder(
+              itemCount: state.modelData.favoriteBooks?.length ?? 0,
+              itemBuilder: (context, index) {
+                final book = state.modelData.favoriteBooks![index];
+                return ListTile(
+                  title: Text(book.title ?? ""),
+                  // Add other book details here
+                );
+              },
+            );
+          } else {
+            return const Center(child: Text('No favorite books found'));
+          }
+        },
+      ),
+    );
   }
 }

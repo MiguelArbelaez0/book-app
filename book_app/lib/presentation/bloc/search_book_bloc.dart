@@ -18,9 +18,13 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
   final GetBookFavoriteUseCase _getBookFavoriteUseCase;
   SearchBookBloc(this._seacrhBookUseCase, this._addFavoriteBookUseCase,
       this._getBookFavoriteUseCase)
-      : super(SearchBookNormalState(ModelData(books: []))) {
+      : super(SearchBookNormalState(ModelData(
+          books: [],
+          favoriteBooks: [],
+        ))) {
     on<SearchBookResultEvent>((event, emit) => invokeBookResult(event, emit));
     on<AddFavoriteBookEvent>((event, emit) => addFavoritesbooks(event, emit));
+    on<GetFavoriteBookEvent>((event, emit) => getFavoriteBooks(event, emit));
   }
 
   invokeBookResult(SearchBookResultEvent event, Emitter<BookState> emit) async {
@@ -37,5 +41,21 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
     ModelData modeldata =
         state.modelData.copyWith(books: state.modelData.books);
     emit(BookAddedToFavoritesCompleteState(modeldata));
+  }
+
+  // getFavoriteBooks(GetFavoriteBookEvent event, Emitter<BookState> emit) async {
+  //   emit(GetBookLoadingState(state.modelData));
+  //   List<Document> favoriteBooks =
+  //       await _getBookFavoriteUseCase.invokeGetFavoriteBook();
+  //   ModelData modelData = state.modelData.copyWith(books: favoriteBooks);
+  //   emit(GetFavoriteBookCompletedState(modelData));
+  // }
+  getFavoriteBooks(GetFavoriteBookEvent event, Emitter<BookState> emit) async {
+    emit(GetBookLoadingState(state.modelData));
+    List<Document> favoriteBooks =
+        await _getBookFavoriteUseCase.invokeGetFavoriteBook();
+    ModelData modelData =
+        state.modelData.copyWith(favoriteBooks: favoriteBooks);
+    emit(GetFavoriteBookCompletedState(modelData));
   }
 }
