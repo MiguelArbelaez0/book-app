@@ -19,4 +19,16 @@ class LocalDataSource {
         .map((item) => Document.fromJson(jsonDecode(item)))
         .toList();
   }
+
+  Future<void> removeBookFromFavorites(Document document) async {
+    final prefs = await SharedPreferences.getInstance();
+    List<String> favoriteBooks = prefs.getStringList('favoriteBooks') ?? [];
+    favoriteBooks.removeWhere((bookString) {
+      return Document.fromJson(jsonDecode(bookString)).titleSuggest ==
+          document.titleSuggest;
+    });
+    await prefs.setStringList('favoriteBooks', favoriteBooks);
+  }
 }
+
+LocalDataSource localDataSource = LocalDataSource();

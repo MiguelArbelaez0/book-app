@@ -1,5 +1,6 @@
 import 'package:book_app/domain/use_cases/add_favorite_book_use.dart';
 import 'package:book_app/domain/use_cases/get_favorite_book_use_case.dart';
+import 'package:book_app/domain/use_cases/remove_favorite_book_use_case.dart';
 import 'package:book_app/domain/use_cases/search_book_use_case.dart';
 import 'package:book_app/presentation/bloc/search_book_bloc.dart';
 
@@ -21,8 +22,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   void initState() {
     super.initState();
-    _searchBookBloc = SearchBookBloc(SeacrhBookUseCase(),
-        AddFavoriteBookUseCase(), GetBookFavoriteUseCase());
+    _searchBookBloc = SearchBookBloc(
+        SeacrhBookUseCase(),
+        AddFavoriteBookUseCase(),
+        GetBookFavoriteUseCase(),
+        RemoveFavoriteBookUseCase());
     _searchBookBloc.add(GetFavoriteBookEvent());
   }
 
@@ -50,7 +54,11 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 return ListTile(
                   title: Text(book.title ?? ""),
                   trailing: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      _searchBookBloc
+                          .add(RemoveFavoriteBookEvent(document: book));
+                      _searchBookBloc.add(GetFavoriteBookEvent());
+                    },
                     child: const Icon(Icons.bookmark, color: Colors.green),
                   ),
                 );

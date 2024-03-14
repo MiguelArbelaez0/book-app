@@ -36,20 +36,30 @@ class GetFavoriteBookCompletedState extends BookState {
   GetFavoriteBookCompletedState(super.modelData);
 }
 
+class RemoveBookFavoriteLoadingState extends BookState {
+  RemoveBookFavoriteLoadingState(super.modelData);
+}
+
+class RemoveFavoriteBookCompleteState extends BookState {
+  RemoveFavoriteBookCompleteState(super.modelData);
+}
+
 class ModelData {
   final List<Document>? books;
   final List<Document>? favoriteBooks;
-  ModelData({
-    required this.books,
-    required this.favoriteBooks,
-  });
+  final Document? bookRemove;
+  ModelData(
+      {required this.books,
+      required this.favoriteBooks,
+      required this.bookRemove});
 
-  ModelData copyWith({
-    List<Document>? books,
-    List<Document>? favoriteBooks,
-  }) =>
+  ModelData copyWith(
+          {List<Document>? books,
+          List<Document>? favoriteBooks,
+          Document? bookRemove}) =>
       ModelData(
         books: books ?? this.books,
         favoriteBooks: favoriteBooks ?? this.favoriteBooks,
+        bookRemove: bookRemove ?? this.bookRemove,
       );
 }

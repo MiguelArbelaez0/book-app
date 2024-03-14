@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:book_app/domain/use_cases/get_favorite_book_use_case.dart';
+import 'package:book_app/domain/use_cases/remove_favorite_book_use_case.dart';
 import 'package:book_app/presentation/bloc/search_book_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,8 +23,11 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   void initState() {
-    _searchBookBloc = SearchBookBloc(SeacrhBookUseCase(),
-        AddFavoriteBookUseCase(), GetBookFavoriteUseCase());
+    _searchBookBloc = SearchBookBloc(
+        SeacrhBookUseCase(),
+        AddFavoriteBookUseCase(),
+        GetBookFavoriteUseCase(),
+        RemoveFavoriteBookUseCase());
     super.initState();
   }
 
