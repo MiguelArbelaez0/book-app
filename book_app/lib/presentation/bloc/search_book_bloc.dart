@@ -62,16 +62,9 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
   removeFavoriteBook(
       RemoveFavoriteBookEvent event, Emitter<BookState> emit) async {
     emit(RemoveBookFavoriteLoadingState(state.modelData));
-
-    // Actualiza SharedPreferences
     _removeFavoriteBookUseCase.invokeRemoveFavoriteBook(event.document);
-
-    // List<Document> updatedFavoriteBooks =
-    //     await localDataSource.getFavoriteBooks();
-
-    ModelData modelData = state.modelData.copyWith(
-        favoriteBooks: state.modelData.favoriteBooks,
-        bookRemove: state.modelData.bookRemove);
+    ModelData modelData =
+        state.modelData.copyWith(bookRemove: state.modelData.bookRemove);
     emit(RemoveFavoriteBookCompleteState(modelData));
   }
 }
