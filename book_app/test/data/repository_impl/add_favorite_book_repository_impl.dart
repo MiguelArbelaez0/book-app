@@ -16,6 +16,6 @@ void main() {
   });
 
   test("", () async {
-    when(() => _mockAddFavoriteBookRepositoryImpl.addBookToFavorites(document));
+    when(() => _mockAddFavoriteBookRepositoryImpl.addBookToFavorites(any()));
   });
 }
