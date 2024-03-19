@@ -10,3 +10,6 @@ class MockSearchBookRepositoryImpl extends Mock
 
 class MockAddFavoriteBookRepositoryImpl extends Mock
     implements LocalDataSource {}
+
+class MockGetFavoriteBookRepositoryImpl extends Mock
+    implements LocalDataSource {}
