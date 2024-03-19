@@ -30,5 +30,3 @@ class LocalDataSource {
     await prefs.setStringList('favoriteBooks', favoriteBooks);
   }
 }
-
-LocalDataSource localDataSource = LocalDataSource();
