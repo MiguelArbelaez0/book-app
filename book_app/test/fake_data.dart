@@ -18,19 +18,4 @@ Document documentFake = Document(
   language: [""],
 );
 
-List<Document> fakeList = [
-  Document(
-    titleSuggest: "",
-    editionKey: [""],
-    coverId: 12,
-    isbn: [""],
-    hasFulltext: false,
-    authorName: [""],
-    contributor: [""],
-    authorKey: [""],
-    firstPublishYear: 1999,
-    title: "",
-    publisher: [""],
-    language: [""],
-  )
-];
+List<Document> fakeList = [];
