@@ -16,6 +16,6 @@ void main() {
 
   test("get-favorite-book", () async {
     when(() => _mockGetFavoriteBookRepositoryImpl.getFavoriteBooks())
-        .thenAnswer((_) => fakeList);
+        .thenAnswer((_) async => fakeList);
   });
 }
