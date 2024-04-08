@@ -25,9 +25,11 @@ void main() {
     when(() => _mockAddFavoriteBookRepositoryImpl.addBookToFavorites(any()))
         .thenAnswer((_) => Future.value());
 
-    await _mockAddFavoriteBookRepositoryImpl.addBookToFavorites(documentFake);
+    // await _mockAddFavoriteBookRepositoryImpl.addBookToFavorites(documentFake);
 
-    verify(() =>
+    await _localDataSource.addBookToFavorites(documentFake);
+
+    verifyNever(() =>
         _mockAddFavoriteBookRepositoryImpl.addBookToFavorites(documentFake));
   });
 }

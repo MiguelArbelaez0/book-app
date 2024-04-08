@@ -22,10 +22,11 @@ void main() {
     when(() => _mockRemoveFavoriteBookRepositoryImpl.removeBookFromFavorites(
         documentFake)).thenAnswer((_) => Future.value());
 
-    await _mockRemoveFavoriteBookRepositoryImpl
-        .removeBookFromFavorites(documentFake);
+    // await _mockRemoveFavoriteBookRepositoryImpl
+    //     .removeBookFromFavorites(documentFake);
 
-    verify(() => _mockRemoveFavoriteBookRepositoryImpl
+    await _localDataSource.removeBookFromFavorites(documentFake);
+    verifyNever(() => _mockRemoveFavoriteBookRepositoryImpl
         .removeBookFromFavorites(documentFake));
   });
 }

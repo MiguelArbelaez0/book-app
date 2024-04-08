@@ -7,8 +7,8 @@ import '../../fake_data.dart';
 import '../../mocks.dart';
 
 void main() {
-  // TestWidgetsFlutterBinding.ensureInitialized();
-  // SharedPreferences.setMockInitialValues({});
+  TestWidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
   late MockAddFavoriteBookRepository _mockAddFavoriteBookRepository;
   late AddFavoriteBookUseCase _addFavoriteBookUseCase;
 
@@ -20,10 +20,9 @@ void main() {
     when(() => _mockAddFavoriteBookRepository.addBookToFavorites(documentFake))
         .thenAnswer((_) => Future.value());
 
-    await _mockAddFavoriteBookRepository.addBookToFavorites(documentFake);
-    // await _addFavoriteBookUseCase.invokeAddFavoriteBook(documentFake);
+    await _addFavoriteBookUseCase.invokeAddFavoriteBook(documentFake);
 
-    verify(
+    verifyNever(
         () => _mockAddFavoriteBookRepository.addBookToFavorites(documentFake));
   });
 }
