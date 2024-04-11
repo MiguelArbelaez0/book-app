@@ -41,7 +41,8 @@ dependencies:
   mocktail: ^1.0.0
   cached_network_image: ^3.2.3
   shared_preferences: ^2.2.2
-
+  bloc_test: ^9.1.7
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

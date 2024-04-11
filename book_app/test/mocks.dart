@@ -4,7 +4,10 @@ import 'package:book_app/domain/repository/add_favorite_book.dart';
 import 'package:book_app/domain/repository/get_favorite_book.dart';
 import 'package:book_app/domain/repository/remove_favorite_book.dart';
 import 'package:book_app/domain/repository/search_book_repository.dart';
+import 'package:book_app/presentation/bloc/search_book_bloc.dart';
+import 'package:book_app/presentation/bloc/search_book_event.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:bloc_test/bloc_test.dart';
 
 class MockSearchBookRepositoryImpl extends Mock
     implements SearchBookDataSource {}
@@ -28,3 +31,6 @@ class MockGetFavoriteBookRepository extends Mock
 
 class MockRemovefromFavoritesBookRepsoitory extends Mock
     implements RemovefromFavoritesBookRepsoitory {}
+
+class MockSearchBookBloc extends MockBloc<BookEvent, BookState>
+    implements SearchBookBloc {}
