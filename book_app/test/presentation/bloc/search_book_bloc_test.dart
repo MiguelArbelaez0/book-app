@@ -7,7 +7,9 @@ import 'package:book_app/domain/use_cases/search_book_use_case.dart';
 import 'package:book_app/presentation/bloc/search_book_bloc.dart';
 import 'package:book_app/presentation/bloc/search_book_event.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
 
+import '../../fake_data.dart';
 import '../../mocks.dart';
 
 void main() {
@@ -20,10 +22,17 @@ void main() {
         SeacrhBookUseCase(searchBookRepository: _mockSearchBookRepository);
   });
   group("test invoke result", () {
+    setUp(() async {
+      when(() => _mockSearchBookRepository.onGetBook(any()))
+          .thenAnswer((_) async => searchResultFake);
+
+      await _seacrhBookUseCase.invokeResultBook("");
+    });
+
     blocTest(
-      "",
+      "when query is empety",
       build: () => SearchBookBloc(
-        SeacrhBookUseCase(searchBookRepository: MockSearchBookRepository()),
+        _seacrhBookUseCase,
         AddFavoriteBookUseCase(
             favoriteBookRepository: MockAddFavoriteBookRepository()),
         GetBookFavoriteUseCase(
@@ -32,10 +41,11 @@ void main() {
             removefromFavoritesBookRepsoitory:
                 MockRemovefromFavoritesBookRepsoitory()),
       ),
-      act: (bloc) {
-        bloc.add(SearchBookResultEvent(query: ''));
-      },
-      expect: () => "",
+      act: (bloc) => bloc.add(SearchBookResultEvent(query: "")),
+      expect: () => [
+        isA<SearchBookLoadingState>(),
+        isA<SearchBookCompletedState>(),
+      ],
     );
   });
 }
