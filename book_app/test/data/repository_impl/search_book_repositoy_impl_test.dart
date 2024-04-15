@@ -17,7 +17,7 @@ void main() {
   test("search-book-repositoryImpl", () async {
     when(
       () => _mockSearchBookRepositoryImpl.getBookResult(any()),
-    ).thenAnswer((_) async => searchResultFake);
+    ).thenAnswer((_) async => searchResultFakeNoData);
 
     final resultest = await _searchBookDataSource.getBookResult("");
     expect(resultest.numFound, 0);

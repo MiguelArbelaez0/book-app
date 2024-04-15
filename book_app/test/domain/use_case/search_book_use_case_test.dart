@@ -17,7 +17,7 @@ void main() {
   test("use-case-search-book", () async {
     //configurar el test = emular las llamadas
     when(() => _mockSearchBookRepository.onGetBook(any()))
-        .thenAnswer((_) async => searchResultFake);
+        .thenAnswer((_) async => searchResultFakeNoData);
     //hacer el llamdo real
     final result = await _searchBookUseCase.invokeResultBook("");
     //comprobar el test

@@ -12,6 +12,63 @@ import 'package:mocktail/mocktail.dart';
 import '../../fake_data.dart';
 import '../../mocks.dart';
 
+// void main() {
+//   late SeacrhBookUseCase _seacrhBookUseCase;
+//   late MockSearchBookRepository _mockSearchBookRepository;
+
+//   setUpAll(() {
+//     _mockSearchBookRepository = MockSearchBookRepository();
+//     _seacrhBookUseCase =
+//         SeacrhBookUseCase(searchBookRepository: _mockSearchBookRepository);
+//   });
+//   group("test invoke result", () {
+//     setUp(() async {
+//       when(() => _mockSearchBookRepository.onGetBook(any()))
+//           .thenAnswer((_) async => searchResultFake);
+
+//       await _seacrhBookUseCase.invokeResultBook("");
+//     });
+
+//     blocTest(
+//       "when query is empety",
+//       build: () => SearchBookBloc(
+//         _seacrhBookUseCase,
+//         AddFavoriteBookUseCase(
+//             favoriteBookRepository: MockAddFavoriteBookRepository()),
+//         GetBookFavoriteUseCase(
+//             getFavoriteBookRepository: MockGetFavoriteBookRepository()),
+//         RemoveFavoriteBookUseCase(
+//             removefromFavoritesBookRepsoitory:
+//                 MockRemovefromFavoritesBookRepsoitory()),
+//       ),
+//       act: (bloc) => bloc.add(SearchBookResultEvent(query: "")),
+//       expect: () => [
+//         isA<SearchBookLoadingState>(),
+//         isA<SearchBookCompletedState>(),
+//       ],
+//     );
+//   });
+//   blocTest<SearchBookBloc, BookState>(
+//     " cuando hay datos",
+//     build: () => SearchBookBloc(
+//       _seacrhBookUseCase,
+//       AddFavoriteBookUseCase(
+//           favoriteBookRepository: MockAddFavoriteBookRepository()),
+//       GetBookFavoriteUseCase(
+//           getFavoriteBookRepository: MockGetFavoriteBookRepository()),
+//       RemoveFavoriteBookUseCase(
+//           removefromFavoritesBookRepsoitory:
+//               MockRemovefromFavoritesBookRepsoitory()),
+//     ),
+//     act: (bloc) {
+//       bloc.add(SearchBookResultEvent(query: 'test'));
+//     },
+//     expect: () => [
+//       isA<SearchBookLoadingState>(),
+//       isA<SearchBookCompletedState>(),
+//     ],
+//   );
+// }
 void main() {
   late SeacrhBookUseCase _seacrhBookUseCase;
   late MockSearchBookRepository _mockSearchBookRepository;
@@ -21,45 +78,48 @@ void main() {
     _seacrhBookUseCase =
         SeacrhBookUseCase(searchBookRepository: _mockSearchBookRepository);
   });
+
   group("test invoke result", () {
-    setUp(() async {
-      when(() => _mockSearchBookRepository.onGetBook(any()))
-          .thenAnswer((_) async => searchResultFake);
-
-      await _seacrhBookUseCase.invokeResultBook("");
-    });
-
-    blocTest(
-      "when query is empety",
-      build: () => SearchBookBloc(
-        _seacrhBookUseCase,
-        AddFavoriteBookUseCase(
-            favoriteBookRepository: MockAddFavoriteBookRepository()),
-        GetBookFavoriteUseCase(
-            getFavoriteBookRepository: MockGetFavoriteBookRepository()),
-        RemoveFavoriteBookUseCase(
-            removefromFavoritesBookRepsoitory:
-                MockRemovefromFavoritesBookRepsoitory()),
-      ),
+    blocTest<SearchBookBloc, BookState>(
+      "when query is empty",
+      build: () {
+        when(() => _mockSearchBookRepository.onGetBook(any()))
+            .thenAnswer((_) async => searchResultFakeNoData);
+        return SearchBookBloc(
+          _seacrhBookUseCase,
+          AddFavoriteBookUseCase(
+              favoriteBookRepository: MockAddFavoriteBookRepository()),
+          GetBookFavoriteUseCase(
+              getFavoriteBookRepository: MockGetFavoriteBookRepository()),
+          RemoveFavoriteBookUseCase(
+              removefromFavoritesBookRepsoitory:
+                  MockRemovefromFavoritesBookRepsoitory()),
+        );
+      },
       act: (bloc) => bloc.add(SearchBookResultEvent(query: "")),
       expect: () => [
         isA<SearchBookLoadingState>(),
         isA<SearchBookCompletedState>(),
       ],
     );
-    blocTest(
-      "when query data",
-      build: () => SearchBookBloc(
-        _seacrhBookUseCase,
-        AddFavoriteBookUseCase(
-            favoriteBookRepository: MockAddFavoriteBookRepository()),
-        GetBookFavoriteUseCase(
-            getFavoriteBookRepository: MockGetFavoriteBookRepository()),
-        RemoveFavoriteBookUseCase(
-            removefromFavoritesBookRepsoitory:
-                MockRemovefromFavoritesBookRepsoitory()),
-      ),
-      act: (bloc) => bloc.add(SearchBookResultEvent(query: "")),
+
+    blocTest<SearchBookBloc, BookState>(
+      "cuando hay datos",
+      build: () {
+        when(() => _mockSearchBookRepository.onGetBook(any()))
+            .thenAnswer((_) async => searchResultfakeWithData);
+        return SearchBookBloc(
+          _seacrhBookUseCase,
+          AddFavoriteBookUseCase(
+              favoriteBookRepository: MockAddFavoriteBookRepository()),
+          GetBookFavoriteUseCase(
+              getFavoriteBookRepository: MockGetFavoriteBookRepository()),
+          RemoveFavoriteBookUseCase(
+              removefromFavoritesBookRepsoitory:
+                  MockRemovefromFavoritesBookRepsoitory()),
+        );
+      },
+      act: (bloc) => bloc.add(SearchBookResultEvent(query: 'test')),
       expect: () => [
         isA<SearchBookLoadingState>(),
         isA<SearchBookCompletedState>(),
