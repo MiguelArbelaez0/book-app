@@ -47,5 +47,20 @@ void main() {
         isA<SearchBookCompletedState>(),
       ],
     );
+    blocTest(
+      "when query data",
+      build: () => SearchBookBloc(
+        _seacrhBookUseCase,
+        AddFavoriteBookUseCase(
+            favoriteBookRepository: MockAddFavoriteBookRepository()),
+        GetBookFavoriteUseCase(
+            getFavoriteBookRepository: MockGetFavoriteBookRepository()),
+        RemoveFavoriteBookUseCase(
+            removefromFavoritesBookRepsoitory:
+                MockRemovefromFavoritesBookRepsoitory()),
+      ),
+      act: (bloc) => bloc.add(SearchBookResultEvent(query: "")),
+      expect: () => [0],
+    );
   });
 }
