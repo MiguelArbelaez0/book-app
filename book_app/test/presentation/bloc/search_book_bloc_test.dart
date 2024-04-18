@@ -125,5 +125,22 @@ void main() {
         isA<SearchBookCompletedState>(),
       ],
     );
+    // test("", () {
+    //   final bloc = SearchBookBloc(
+    //     _seacrhBookUseCase,
+    //     AddFavoriteBookUseCase(
+    //         favoriteBookRepository: MockAddFavoriteBookRepository()),
+    //     GetBookFavoriteUseCase(
+    //         getFavoriteBookRepository: MockGetFavoriteBookRepository()),
+    //     RemoveFavoriteBookUseCase(
+    //         removefromFavoritesBookRepsoitory:
+    //             MockRemovefromFavoritesBookRepsoitory()),
+    //   );
+    //   when(() => _mockSearchBookRepository.onGetBook(any()))
+    //       .thenAnswer((_) async => searchResultfakeWithData);
+
+    //   bloc.add(SearchBookResultEvent(query: ""));
+    //   expect(actual, matcher)
+    // });
   });
 }
