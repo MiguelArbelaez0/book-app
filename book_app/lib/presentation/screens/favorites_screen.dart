@@ -9,65 +9,98 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/search_book_event.dart';
 
+// class FavoritesScreen extends StatefulWidget {
+//   const FavoritesScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<FavoritesScreen> createState() => _FavoritesScreenState();
+// }
+
+// class _FavoritesScreenState extends State<FavoritesScreen> {
+//   late final SearchBookBloc _searchBookBloc;
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _searchBookBloc = SearchBookBloc(
+//         SeacrhBookUseCase(),
+//         AddFavoriteBookUseCase(),
+//         GetBookFavoriteUseCase(),
+//         RemoveFavoriteBookUseCase());
+//     _searchBookBloc.add(GetFavoriteBookEvent());
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         backgroundColor: Colors.white,
+//         centerTitle: true,
+//         title: const Text(
+//           'Favorite Books',
+//           style: TextStyle(color: Colors.green),
+//         ),
+//       ),
+//       body: BlocBuilder<SearchBookBloc, BookState>(
+//         bloc: _searchBookBloc,
+//         builder: (context, state) {
+//           if (state is GetBookLoadingState) {
+//             return const Center(child: CircularProgressIndicator());
+//           } else if (state is GetFavoriteBookCompletedState) {
+//             return ListView.builder(
+//               itemCount: state.modelData.favoriteBooks?.length ?? 0,
+//               itemBuilder: (context, index) {
+//                 final book = state.modelData.favoriteBooks![index];
+//                 return ListTile(
+//                   title: Text(book.title ?? ""),
+//                   trailing: GestureDetector(
+//                     onTap: () {
+//                       _searchBookBloc
+//                           .add(RemoveFavoriteBookEvent(document: book));
+//                       _searchBookBloc.add(GetFavoriteBookEvent());
+//                     },
+//                     child: const Icon(Icons.bookmark, color: Colors.green),
+//                   ),
+//                 );
+//               },
+//             );
+//           } else {
+//             return const Center(child: Text('No favorite books found'));
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }
 class FavoritesScreen extends StatefulWidget {
-  const FavoritesScreen({Key? key}) : super(key: key);
+  const FavoritesScreen({super.key});
 
   @override
   State<FavoritesScreen> createState() => _FavoritesScreenState();
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  late final SearchBookBloc _searchBookBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _searchBookBloc = SearchBookBloc(
-        SeacrhBookUseCase(),
-        AddFavoriteBookUseCase(),
-        GetBookFavoriteUseCase(),
-        RemoveFavoriteBookUseCase());
-    _searchBookBloc.add(GetFavoriteBookEvent());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: const Text(
-          'Favorite Books',
-          style: TextStyle(color: Colors.green),
-        ),
-      ),
-      body: BlocBuilder<SearchBookBloc, BookState>(
-        bloc: _searchBookBloc,
-        builder: (context, state) {
-          if (state is GetBookLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is GetFavoriteBookCompletedState) {
-            return ListView.builder(
-              itemCount: state.modelData.favoriteBooks?.length ?? 0,
-              itemBuilder: (context, index) {
-                final book = state.modelData.favoriteBooks![index];
-                return ListTile(
-                  title: Text(book.title ?? ""),
-                  trailing: GestureDetector(
-                    onTap: () {
-                      _searchBookBloc
-                          .add(RemoveFavoriteBookEvent(document: book));
-                      _searchBookBloc.add(GetFavoriteBookEvent());
-                    },
-                    child: const Icon(Icons.bookmark, color: Colors.green),
-                  ),
-                );
-              },
-            );
-          } else {
-            return const Center(child: Text('No favorite books found'));
-          }
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: Colors.green,
+              child: Container(
+                margin: const EdgeInsets.only(top: 150),
+                decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30))),
+                height: 703,
+                width: 392,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
