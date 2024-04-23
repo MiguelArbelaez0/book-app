@@ -34,6 +34,10 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
         (event, emit) => removeFavoriteBook(event, emit));
   }
 
+  // Función que recibe un evento de resultado de búsqueda de libro y hace lo siguiente:
+  /// 1. Emite un estado SearchBookLoadingState a la UI para indicar que la búsqueda de libros está en progreso.
+  /// 2. Usa el caso de uso para buscar el resultado del libro.
+  /// 3. Emite SearchBookCompletedState una vez que se obtiene el resultado de la busqueda muestra la lista de libros que concuerdan con las palabras que introdujo el usuairo.
   invokeBookResult(SearchBookResultEvent event, Emitter<BookState> emit) async {
     emit(SearchBookLoadingState(state.modelData));
     SearchResult searchResult =
@@ -42,6 +46,10 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
     emit(SearchBookCompletedState(modelData));
   }
 
+  ///Funcion que recibe un libro del evento y hace lo siguiente :
+  ///1. emite un estado BookAddedToFavoritesState a la UI
+  ///2. usa el caso de uso para guardar el libro de manera local
+  ///3. emite BookAddedToFavoritesCompleteState una vez guarda el libro a la ui
   addFavoritesbooks(AddFavoriteBookEvent event, Emitter<BookState> emit) async {
     emit(BookAddedToFavoritesState(state.modelData));
     await _addFavoriteBookUseCase.invokeAddFavoriteBook(event.document);
@@ -50,6 +58,10 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
     emit(BookAddedToFavoritesCompleteState(modeldata));
   }
 
+  /// Función que maneja el evento GetFavoriteBookEvent y realiza lo siguiente:
+  /// 1. Emite un estado GetBookLoadingState a la UI
+  /// 2. Usa el caso de uso para obtener los libros favoritos que el usario guardo manera local en el dispositivo
+  /// 3. Emite GetFavoriteBookCompletedState una vez que se obtienen los libros favoritos
   getFavoriteBooks(GetFavoriteBookEvent event, Emitter<BookState> emit) async {
     emit(GetBookLoadingState(state.modelData));
     List<Document> favoriteBooks =
@@ -59,6 +71,10 @@ class SearchBookBloc extends Bloc<BookEvent, BookState> {
     emit(GetFavoriteBookCompletedState(modelData));
   }
 
+  /// Función que maneja el evento RemoveFavoriteBookEvent y realiza lo siguiente:
+  /// 1. Emite un estado RemoveBookFavoriteLoadingState a la UI
+  /// 2. Usa el caso de uso para eliminar el libro favorito.
+  /// 3. Emite RemoveFavoriteBookCompleteState una vez que se elimina por completo el libro de los favoritos.
   removeFavoriteBook(
       RemoveFavoriteBookEvent event, Emitter<BookState> emit) async {
     emit(RemoveBookFavoriteLoadingState(state.modelData));
