@@ -34,13 +34,15 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "Books",
-          style: TextStyle(color: Colors.green),
-        ),
-        backgroundColor: Colors.white,
+        // title: const Text(
+        //   "Books",
+        //   style:
+        //       TextStyle(color: Color(0xFF335247), fontWeight: FontWeight.bold),
+        // ),
+        backgroundColor: const Color(0xFF335247),
       ),
       body: Container(
         margin: const EdgeInsets.all(20),
