@@ -34,87 +34,117 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
-      appBar: AppBar(
-        centerTitle: true,
-        // title: const Text(
-        //   "Books",
-        //   style:
-        //       TextStyle(color: Color(0xFF335247), fontWeight: FontWeight.bold),
-        // ),
-        backgroundColor: const Color(0xFF335247),
-      ),
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: _searchController,
-              onChanged: (value) {
-                _debounceTimer?.cancel();
-                _debounceTimer = Timer(const Duration(seconds: 5), () {
-                  _searchBookBloc.add(SearchBookResultEvent(query: value));
-                });
-              },
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                suffixIcon: Icon(Icons.search),
+      body: Column(
+        children: [
+          Expanded(
+            child: Container(
+              color: const Color(0xFF335247),
+              child: Container(
+                margin: const EdgeInsets.only(top: 150),
+                decoration: const BoxDecoration(
+                    color: Color(0xFFFFFFFF),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30))),
+                height: 703,
+                width: 392,
+                child: Column(children: [
+                  // Container(
+                  //   margin: const EdgeInsets.only(top: 10),
+                  //   child: const Text(
+                  //     "Mis Libros",
+                  //     style: TextStyle(
+                  //       fontSize: 40,
+                  //       fontWeight: FontWeight.bold,
+                  //       color: Color(0xFF335247),
+                  //     ),
+                  //   ),
+                  // ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextField(
+                            controller: _searchController,
+                            onChanged: (value) {
+                              _debounceTimer?.cancel();
+                              _debounceTimer =
+                                  Timer(const Duration(seconds: 5), () {
+                                _searchBookBloc
+                                    .add(SearchBookResultEvent(query: value));
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              suffixIcon: Icon(Icons.search),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          BlocBuilder<SearchBookBloc, BookState>(
+                            bloc: _searchBookBloc,
+                            builder: (context, state) {
+                              final books = state.modelData.books ?? [];
+                              if (state is SearchBookLoadingState) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              } else if (state is SearchBookCompletedState) {
+                                return Expanded(
+                                  child: ListView.builder(
+                                    itemCount: books.length,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      final book = books[index];
+                                      return ListTile(
+                                        title: Text(
+                                            books[index].titleSuggest ?? ""),
+                                        trailing: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.favorite_border,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                _searchBookBloc.add(
+                                                    AddFavoriteBookEvent(
+                                                        document: book));
+                                              },
+                                            ),
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.info_outline,
+                                                color: Colors.blue,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.pushNamed(
+                                                  context,
+                                                  'detail_screen',
+                                                  arguments: book,
+                                                );
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              }
+                              return Container();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ]),
               ),
             ),
-            const SizedBox(height: 20),
-            BlocBuilder<SearchBookBloc, BookState>(
-              bloc: _searchBookBloc,
-              builder: (context, state) {
-                final books = state.modelData.books ?? [];
-                if (state is SearchBookLoadingState) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is SearchBookCompletedState) {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: books.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final book = books[index];
-                        return ListTile(
-                          title: Text(books[index].titleSuggest ?? ""),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.favorite_border,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () {
-                                  _searchBookBloc.add(
-                                      AddFavoriteBookEvent(document: book));
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.info_outline,
-                                  color: Colors.blue,
-                                ),
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    'detail_screen',
-                                    arguments: book,
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                }
-                return Container();
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
